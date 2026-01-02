@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ce3monhy2t8qj"]
 
 [ext_resource type="Script" uid="uid://uto0exr76bjc" path="res://character.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bubmud0o8nrbh" path="res://spinner_prototype.gd" id="2_0xm2m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dm0k"]
 radius = 9.0
@@ -49,6 +50,9 @@ shape = SubResource("RectangleShape2D_7dm0k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.63, 3.63)
+
+[node name="SpinnerPrototype" type="Node2D" parent="."]
+script = ExtResource("2_0xm2m")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
