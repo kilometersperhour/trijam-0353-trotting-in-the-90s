@@ -17,7 +17,16 @@ var key_button: String
 var target_angle = 20
 const STIFFNESS = 0.7
 
-@onready var visual = $LegBody/Sprite2D
+#@onready var visual = $LegBody/Sprite2D
+@onready var label = $LegBody/SubViewportContainer/SubViewport/Label
+@onready var label_parent = $LegBody/SubViewportContainer
+
+func setup_random():
+	if randf() > 0.5:
+		leg_length = 16
+	else:
+		leg_length = 25
+		
 
 
 func _ready() -> void:
@@ -27,17 +36,24 @@ func _ready() -> void:
 	shape.shape.height = leg_length
 	shape.position.y = (shape.shape.height/2) - shape.shape.radius
 
+	label.text = key_button
+
+	# ugh
+
 
 func _process(delta: float) -> void:
 	motor_target_velocity = (target_angle - leg_body.rotation_degrees) * STIFFNESS
-
+	
+	# unrotate label
+	#label_parent.position = position
+	
 
 # toggle
 func _unhandled_input(event: InputEvent) -> void:
 	if event.as_text() == key_button:
 		if event.is_pressed():
 			target_angle = 20
-			visual.modulate = Color(Color.DARK_BLUE)
+			label.modulate = Color(Color.DARK_BLUE)
 		elif event.is_released():
 			target_angle = -20
-			visual.modulate = Color.WHITE
+			label.modulate = Color.WHITE

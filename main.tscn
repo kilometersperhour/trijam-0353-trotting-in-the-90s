@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce3monhy2t8qj"]
+[gd_scene load_steps=5 format=3 uid="uid://ce3monhy2t8qj"]
 
 [ext_resource type="Script" uid="uid://uto0exr76bjc" path="res://character.gd" id="1_ig7tw"]
 
@@ -7,6 +7,9 @@ radius = 9.0
 height = 52.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(257.698, 73.0515)
 
 [node name="Node2D" type="Node2D"]
 
@@ -38,6 +41,7 @@ rotation = -1.0472
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(0, 51)
+scale = Vector2(1.34265, 0.983322)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 scale = Vector2(6.228, 1.02247)
@@ -65,4 +69,14 @@ offset_bottom = 8.0
 scale = Vector2(0.460126, 0.460066)
 text = "reset"
 
+[node name="Killzone" type="Area2D" parent="."]
+position = Vector2(0, 51)
+scale = Vector2(1.34265, 0.983322)
+
+[node name="Area2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-2.97917, 52.9668)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ig7tw")
+
 [connection signal="pressed" from="Control/Button" to="Character" method="_on_button_pressed"]
+[connection signal="body_entered" from="Killzone" to="Character" method="_on_killzone_body_entered"]

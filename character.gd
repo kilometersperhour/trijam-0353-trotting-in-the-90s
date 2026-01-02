@@ -16,7 +16,7 @@ var keys
 
 
 func setup_random():
-	keys = ["H", "J", "K", "L", ";"]
+	keys = ["F", "G", "H", "J", "K", "L"]
 	
 	# points are node order
 	# in order from left to right
@@ -30,19 +30,34 @@ func setup_random():
 	]
 	
 	# i don't event know 
+	# how randomness would work
+	
 	for p: Node2D in leg_points:
+		# uh return if you usen all the keys already
+		if len(keys) == 0:
+			break
+			
+		
 		if randf() > 0.5:
 			
+			#
 			var instance: Leg = leg_scene.instantiate()
 			instance.key_button = keys.pop_front()
-			
-			
-			if randf() > 0.5:
-				instance.leg_length = 16
-			else:
-				instance.leg_length = 25
-			
+			instance.setup_random()
 			p.add_child(instance)
+
+			
+			if randf() < 0.15:
+				var e: Leg = leg_scene.instantiate()
+				e.node_a = "../LegBody"
+				e.node_b = "LegBody"
+				e.position.y = (instance.leg_length) - 3.0 #radius
+				e.key_button = keys.pop_front()
+				e.setup_random()
+				instance.add_child(e)
+				
+			
+			
 		
 		
 
@@ -54,4 +69,10 @@ func _ready() -> void:
 
 func _on_button_pressed() -> void:
 	get_tree().reload_current_scene()
+	
+
+
+func _on_killzone_body_entered(body: Node2D) -> void:
+	if body == main_body:
+		_on_button_pressed()
 	
