@@ -12,5 +12,9 @@ config_version=5
 
 config/name="trotting in the 90s"
 run/main_scene="uid://ce3monhy2t8qj"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="trotting in the 90s"
