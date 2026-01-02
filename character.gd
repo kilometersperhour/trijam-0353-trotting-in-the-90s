@@ -74,5 +74,10 @@ func _on_button_pressed() -> void:
 
 func _on_killzone_body_entered(body: Node2D) -> void:
 	if body == main_body:
-		_on_button_pressed()
+		# have to defer removing the bodies because
+		# we're inside a physics proccess....
+		#call_deferred(_on_button_pressed)
+		_on_button_pressed.call_deferred()
+		
+		#_on_button_pressed()
 	

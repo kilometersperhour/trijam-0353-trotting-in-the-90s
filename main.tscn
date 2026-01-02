@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ce3monhy2t8qj"]
+[gd_scene load_steps=7 format=3 uid="uid://ce3monhy2t8qj"]
 
 [ext_resource type="Script" uid="uid://uto0exr76bjc" path="res://character.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://bubmud0o8nrbh" path="res://spinner_prototype.gd" id="2_0xm2m"]
+[ext_resource type="Script" path="res://spinner_prototype.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://c0fai85ll37ex" path="res://timer_ui.gd" id="3_h2yge"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dm0k"]
 radius = 9.0
@@ -65,6 +66,7 @@ offset_right = -137.0
 offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_h2yge")
 
 [node name="Button" type="Button" parent="Control"]
 layout_mode = 1
@@ -73,13 +75,21 @@ offset_bottom = 8.0
 scale = Vector2(0.460126, 0.460066)
 text = "reset"
 
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 22.0
+offset_right = 46.0
+offset_bottom = 45.0
+scale = Vector2(0.521922, 0.598748)
+text = "time"
+
 [node name="Killzone" type="Area2D" parent="."]
 position = Vector2(0, 51)
 scale = Vector2(1.34265, 0.983322)
 
 [node name="Area2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(-2.97917, 52.9668)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ig7tw")
 
 [connection signal="pressed" from="Control/Button" to="Character" method="_on_button_pressed"]
