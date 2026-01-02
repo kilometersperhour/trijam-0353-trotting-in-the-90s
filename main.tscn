@@ -1,14 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ce3monhy2t8qj"]
+[gd_scene load_steps=4 format=3 uid="uid://ce3monhy2t8qj"]
 
 [ext_resource type="Script" uid="uid://uto0exr76bjc" path="res://character.gd" id="1_ig7tw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dm0k"]
 radius = 9.0
-height = 34.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig7tw"]
-radius = 3.0
-height = 16.0
+height = 52.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
 
@@ -17,33 +13,28 @@ height = 16.0
 [node name="Character" type="Node2D" parent="."]
 script = ExtResource("1_ig7tw")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="Character"]
+[node name="CharacterBody" type="RigidBody2D" parent="Character"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/CharacterBody"]
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_7dm0k")
 
-[node name="PinJoint2D_Right" type="PinJoint2D" parent="Character"]
-position = Vector2(9, 5)
-node_a = NodePath("../RigidBody2D")
-node_b = NodePath("RigidBody2D2")
+[node name="Node2D_1" type="Node2D" parent="Character"]
+position = Vector2(-22, 0)
+rotation = 1.0472
 
-[node name="RigidBody2D2" type="RigidBody2D" parent="Character/PinJoint2D_Right"]
+[node name="Node2D_2" type="Node2D" parent="Character"]
+position = Vector2(-12, 5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/PinJoint2D_Right/RigidBody2D2"]
+[node name="Node2D_3" type="Node2D" parent="Character"]
 position = Vector2(0, 5)
-shape = SubResource("CapsuleShape2D_ig7tw")
 
-[node name="PinJoint2D_Left" type="PinJoint2D" parent="Character"]
-position = Vector2(-9, 5)
-node_a = NodePath("../RigidBody2D")
-node_b = NodePath("RigidBody2D2")
+[node name="Node2D_4" type="Node2D" parent="Character"]
+position = Vector2(12, 5)
 
-[node name="RigidBody2D2" type="RigidBody2D" parent="Character/PinJoint2D_Left"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/PinJoint2D_Left/RigidBody2D2"]
-position = Vector2(0, 5)
-shape = SubResource("CapsuleShape2D_ig7tw")
+[node name="Node2D_5" type="Node2D" parent="Character"]
+position = Vector2(22, 0)
+rotation = -1.0472
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(0, 51)
@@ -54,3 +45,24 @@ shape = SubResource("RectangleShape2D_7dm0k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.63, 3.63)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = 37.0
+offset_right = -137.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(0.460126, 0.460066)
+text = "reset"
+
+[connection signal="pressed" from="Control/Button" to="Character" method="_on_button_pressed"]
