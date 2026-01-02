@@ -1,47 +1,57 @@
 extends Node2D
 
-# get joints
-@onready var joint1 = $PinJoint2D_Right
-@onready var joint2 = $PinJoint2D_Left
 
-# get bodies
-@onready var body1 = $PinJoint2D_Right/RigidBody2D2
-@onready var body2 = $PinJoint2D_Left/RigidBody2D2
+
+# reference points so this scene knows where to put the legs
+var leg_points: Array[Node]
+
+# get leg scene so we can instance it
+const leg_scene = preload("res://leg.tscn")
+
+# assign keys to legs
+var keys
+
+@onready var main_body = $CharacterBody
+
+
+
+func setup_random():
+	keys = ["H", "J", "K", "L", ";"]
+	
+	# points are node order
+	# in order from left to right
+
+	leg_points = [
+		get_child(1),
+		get_child(2),
+		get_child(3),
+		get_child(4),
+		get_child(5)
+	]
+	
+	# i don't event know 
+	for p: Node2D in leg_points:
+		if randf() > 0.5:
+			
+			var instance: Leg = leg_scene.instantiate()
+			instance.key_button = keys.pop_front()
+			
+			
+			if randf() > 0.5:
+				instance.leg_length = 16
+			else:
+				instance.leg_length = 25
+			
+			p.add_child(instance)
+		
+		
+
 
 
 func _ready() -> void:
-	joint1.motor_enabled = true
-	joint2.motor_enabled = true
+	setup_random()
 
 
-const STIFFNESS = 0.8
-
-var target1: int = -20
-var target2: int = 20
-
-
-func _process(delta: float) -> void:
-	joint1.motor_target_velocity = (target1-body1.rotation_degrees) * STIFFNESS
-	joint2.motor_target_velocity = (target2-body2.rotation_degrees) * STIFFNESS
-
-
-
-func _input(event: InputEvent) -> void:
-	# switch angles on key presses
-	
-	if event.is_pressed():
-		if event.as_text() == "A":
-			if target2 < 0:
-				target2 = 20
-			else:
-				target2 = -20
-		
-		if event.as_text() == "S":
-			if target1 < 0:
-				target1 = 20
-			else:
-				target1 = -20
-
-	
-	
+func _on_button_pressed() -> void:
+	get_tree().reload_current_scene()
 	

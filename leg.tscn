@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdo3dy3ihymam"]
+
+[ext_resource type="Script" uid="uid://bg04g7vgox0ef" path="res://leg.gd" id="1_onwxs"]
+[ext_resource type="Texture2D" uid="uid://cea8tn63m8hpl" path="res://icon.svg" id="2_q16ya"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig7tw"]
+resource_local_to_scene = true
+radius = 3.0
+height = 20.0
+
+[node name="PinJoint" type="PinJoint2D"]
+node_a = NodePath("../../CharacterBody")
+node_b = NodePath("LegBody")
+softness = 0.1
+script = ExtResource("1_onwxs")
+
+[node name="LegBody" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LegBody"]
+shape = SubResource("CapsuleShape2D_ig7tw")
+
+[node name="Sprite2D" type="Sprite2D" parent="LegBody"]
+scale = Vector2(0.0386612, 0.0400654)
+texture = ExtResource("2_q16ya")
