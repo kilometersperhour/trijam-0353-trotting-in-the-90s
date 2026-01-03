@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce3monhy2t8qj"]
+[gd_scene load_steps=8 format=3 uid="uid://ce3monhy2t8qj"]
 
 [ext_resource type="Script" uid="uid://uto0exr76bjc" path="res://character.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bubmud0o8nrbh" path="res://spinner_prototype.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://c0fai85ll37ex" path="res://timer_ui.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://ctn5vmvg6saqg" path="res://polygon_2d_spinner.gd" id="4_1bvp3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dm0k"]
 radius = 9.0
@@ -93,6 +94,9 @@ position = Vector2(0, 51)
 [node name="Area2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(-2.97917, 52.9668)
 shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+script = ExtResource("4_1bvp3")
 
 [connection signal="ready_to_reset" from="Character" to="Timer UI" method="_on_character_ready_to_reset"]
 [connection signal="pressed" from="Timer UI/Button" to="Character" method="_on_button_pressed"]
