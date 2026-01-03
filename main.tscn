@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ce3monhy2t8qj"]
 
 [ext_resource type="Script" uid="uid://uto0exr76bjc" path="res://character.gd" id="1_ig7tw"]
-[ext_resource type="Script" path="res://spinner_prototype.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bubmud0o8nrbh" path="res://spinner_prototype.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://c0fai85ll37ex" path="res://timer_ui.gd" id="3_h2yge"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dm0k"]
@@ -9,6 +9,7 @@ radius = 9.0
 height = 52.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(26.011559, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
 size = Vector2(257.698, 73.0515)
@@ -19,6 +20,7 @@ size = Vector2(257.698, 73.0515)
 script = ExtResource("1_ig7tw")
 
 [node name="CharacterBody" type="RigidBody2D" parent="Character"]
+can_sleep = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character/CharacterBody"]
 rotation = -1.5708
@@ -43,9 +45,9 @@ rotation = -1.0472
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(0, 51)
-scale = Vector2(1.34265, 0.983322)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1, 0)
 scale = Vector2(6.228, 1.02247)
 shape = SubResource("RectangleShape2D_7dm0k")
 
@@ -55,7 +57,7 @@ zoom = Vector2(3.63, 3.63)
 [node name="SpinnerPrototype" type="Node2D" parent="."]
 script = ExtResource("2_0xm2m")
 
-[node name="Control" type="Control" parent="."]
+[node name="Timer UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,29 +70,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_h2yge")
 
-[node name="Button" type="Button" parent="Control"]
+[node name="Button" type="Button" parent="Timer UI"]
 layout_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
 scale = Vector2(0.460126, 0.460066)
 text = "reset"
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Timer UI"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 22.0
-offset_right = 46.0
-offset_bottom = 45.0
+offset_left = 25.0
+offset_top = -105.0
+offset_right = 337.30722
+offset_bottom = 133.44955
 scale = Vector2(0.521922, 0.598748)
 text = "time"
+vertical_alignment = 2
 
 [node name="Killzone" type="Area2D" parent="."]
 position = Vector2(0, 51)
-scale = Vector2(1.34265, 0.983322)
 
 [node name="Area2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(-2.97917, 52.9668)
 shape = SubResource("RectangleShape2D_ig7tw")
 
-[connection signal="pressed" from="Control/Button" to="Character" method="_on_button_pressed"]
+[connection signal="ready_to_reset" from="Character" to="Timer UI" method="_on_character_ready_to_reset"]
+[connection signal="pressed" from="Timer UI/Button" to="Character" method="_on_button_pressed"]
 [connection signal="body_entered" from="Killzone" to="Character" method="_on_killzone_body_entered"]

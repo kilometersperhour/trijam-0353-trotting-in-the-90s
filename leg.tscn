@@ -14,6 +14,7 @@ softness = 0.1
 script = ExtResource("1_onwxs")
 
 [node name="LegBody" type="RigidBody2D" parent="."]
+can_sleep = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LegBody"]
 shape = SubResource("CapsuleShape2D_ig7tw")

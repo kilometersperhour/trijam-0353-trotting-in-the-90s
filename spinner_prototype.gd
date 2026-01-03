@@ -11,9 +11,9 @@ var wedge_width : float = 1 / wedge_count
 # bottom point at origin, [top-left point], [top-right point]
 # this should be a function but I'll figure that out later
 var simple_wedge : Array = [
-	[0,0],#wedge_center, #
-	[-wedge_depth * sin(PI * wedge_width),-wedge_depth * cos(PI * wedge_width)], #
-	[wedge_depth * sin(PI * wedge_width),-wedge_depth * cos(PI * wedge_width)] #
+	[0, 0],#wedge_center, #
+	[-wedge_depth * sin(PI * wedge_width), -wedge_depth * cos(PI * wedge_width)], #
+	[ wedge_depth * sin(PI * wedge_width), -wedge_depth * cos(PI * wedge_width)] #
 ]
 
 

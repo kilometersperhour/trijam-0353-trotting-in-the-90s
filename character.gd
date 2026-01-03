@@ -13,6 +13,8 @@ var keys
 
 @onready var main_body = $CharacterBody
 
+# use a global node to store highscores
+@onready var globals = get_node("/root/Globals")
 
 
 func setup_random():
@@ -61,13 +63,14 @@ func setup_random():
 		
 		
 
-
+signal ready_to_reset
 
 func _ready() -> void:
 	setup_random()
 
 
 func _on_button_pressed() -> void:
+	ready_to_reset.emit()
 	get_tree().reload_current_scene()
 	
 
